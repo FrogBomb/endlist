@@ -80,6 +80,17 @@ class endList():
             self._toGo = self._processedfront.__iter__() ##watch this later
             self._processedFront = []
         self._compsFunc.append(function)
+        
+    def  _sliceHelperFunct(self, sta, ste, sto):
+            i = sta
+            if sto == None:
+                while(True):
+                    yield self[i]
+                    i+=ste
+            else:
+                while(abs(i-sto)=>abs(ste)):
+                    yield self[i]
+                    i+=ste
 
         
     def __getitem__ (self, index):
@@ -87,8 +98,12 @@ class endList():
             start = index.start
             step = index.step
             stop = index.stop
-            for i in xrange(start, stop, step):
-                return self[i]
+            if start == None:
+                start = 0
+            if step == None:
+                step = 1
+            return endList(self._sliceHelperFunct(start, step, stop))
+                
         elif type(index) == int:
             if index<0:
                 raise IndexError
@@ -151,12 +166,14 @@ class endListRange(endList):
                     yield i
                     i+=ste
             else:
-                while(abs(i-sto)>abs(ste)):
+                while(abs(i-sto)>=abs(ste)):
                     yield i
                     i+=ste
         endList.__init__(self, makeGen(start, step, stop))
 
 
+
+    
     
 
     
