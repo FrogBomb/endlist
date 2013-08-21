@@ -154,7 +154,7 @@ class endListRange(endList):
                 while(abs(i-sto)>abs(ste)):
                     yield i
                     i+=ste
-        self.__init__(makeGen(start, step, stop))
+        endList.__init__(self, makeGen(start, step, stop))
 
 
     
