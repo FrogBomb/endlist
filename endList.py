@@ -88,7 +88,7 @@ class endList():
                     yield self[i]
                     i+=ste
             else:
-                while(abs(i-sto)=>abs(ste)):
+                while(abs(i-sto)>=abs(ste)):
                     yield self[i]
                     i+=ste
 
